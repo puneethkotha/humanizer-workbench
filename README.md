@@ -6,7 +6,7 @@ Every LLM reaches for the same words. This removes them.
 
 ---
 
-AI-generated text has a recognizable fingerprint. Not because it's wrong — often it isn't — but because every language model reaches for the same vocabulary at rates no human writer reproduces: leverage, tapestry, seamless, nuanced, comprehensive. The same sentence rhythm. Paragraph lengths that never vary. Filler openers like "it is worth noting that."
+AI-generated text has a recognizable fingerprint. Not because it's wrong (often it isn't), but because every language model reaches for the same vocabulary at rates no human writer reproduces: leverage, tapestry, seamless, nuanced, comprehensive. The same sentence rhythm. Paragraph lengths that never vary. Filler openers like "it is worth noting that."
 
 humanizer-workbench detects those patterns and rewrites through a staged pipeline: identify what's AI-like, rewrite for style, refine for rhythm, audit the result. The stages are separate because each requires a different prompt to do its job well.
 
@@ -156,7 +156,7 @@ humanizer-detect INPUT_FILE
 
 ## Style presets
 
-The styles produce meaningfully different output — different structure, vocabulary, and voice, not just different prompt framing.
+The styles produce meaningfully different output: different structure, vocabulary, and voice, not just different prompt framing.
 
 | Style | Voice | What changes |
 |-------|-------|--------------|
@@ -193,7 +193,7 @@ The score (0–100) combines five signals. Higher means more AI-like.
 
 Grade labels: **Very AI-like** (≥75) · **Moderately AI-like** (≥50) · **Slightly AI-like** (≥25) · **Mostly human** (<25)
 
-The score is a diagnostic tool. The tool does not refuse to output text because the score is too high — that call belongs to the user.
+The score is a diagnostic tool. The tool does not refuse to output text because the score is too high. That call belongs to the user.
 
 ---
 
@@ -201,7 +201,7 @@ The score is a diagnostic tool. The tool does not refuse to output text because 
 
 Two detectors scan the input before any transformation. The lexical detector checks against ~50 AI-characteristic vocabulary words and ~30 filler phrases. The structural detector checks sentence length variance, paragraph uniformity, em dash frequency, and opener patterns. Detection results are injected into the rewrite prompt so the model knows exactly what to fix.
 
-The transformer calls the Anthropic API with a distinct prompt per stage. The REWRITE prompt carries the style voice, vocabulary guidance, intensity instructions, and the specific patterns found. REFINE targets rhythm only. AUDIT is a short, fresh read — it doesn't carry the full style context forward, just enough to catch what's still wrong.
+The transformer calls the Anthropic API with a distinct prompt per stage. The REWRITE prompt carries the style voice, vocabulary guidance, intensity instructions, and the specific patterns found. REFINE targets rhythm only. AUDIT is a short, fresh read. It doesn't carry the full style context forward, just enough to catch what's still wrong.
 
 Stage temperatures are tuned separately: 0.7 for REWRITE, 0.45 for REFINE, 0.3 for AUDIT. Lower temperature on the later stages preserves what the earlier passes got right.
 
@@ -228,7 +228,7 @@ src/humanizer/
         main.py         # Click CLI
 ```
 
-The engine depends on `BaseDetector`, `BaseTransformer`, and `AIScorer` — not their implementations. Adding a new detector or transformer backend requires no engine changes.
+The engine depends on `BaseDetector`, `BaseTransformer`, and `AIScorer`, not their implementations. Adding a new detector or transformer backend requires no engine changes.
 
 Full architecture notes: [docs/architecture.md](docs/architecture.md)
 
@@ -238,7 +238,7 @@ Full architecture notes: [docs/architecture.md](docs/architecture.md)
 
 **Separate stages for separate goals.** One prompt doing detection, rewriting, and rhythm editing produces mediocre results at all three. Keeping them separate lets each prompt be precise about what it's trying to do.
 
-**Styles are behavioral.** The `founder` style writes in first person and leads with what went wrong. The `professional` style leads with conclusions. The `academic` style hedges only where the evidence is genuinely ambiguous. These differences live in structured `StylePreset` dataclasses with explicit voice, vocabulary, and structural guidance — not in prompt strings.
+**Styles are behavioral.** The `founder` style writes in first person and leads with what went wrong. The `professional` style leads with conclusions. The `academic` style hedges only where the evidence is genuinely ambiguous. These differences live in structured `StylePreset` dataclasses with explicit voice, vocabulary, and structural guidance, not in prompt strings.
 
 **No unnecessary dependencies.** Sentence splitting uses regex. Three runtime dependencies: `anthropic`, `click`, `rich`.
 
