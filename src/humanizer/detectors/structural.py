@@ -15,6 +15,7 @@ import math
 import re
 
 from humanizer.core.models import DetectionResult, PatternMatch
+from humanizer.detectors.base import BaseDetector
 
 # Patterns that appear at the start of sentences in AI-generated text
 AI_SENTENCE_OPENERS: tuple[str, ...] = (
@@ -88,7 +89,7 @@ def _has_rule_of_three(text: str) -> bool:
     return len(pattern.findall(text)) >= 2
 
 
-class StructuralDetector:
+class StructuralDetector(BaseDetector):
     """Detects AI-like structural patterns: rhythm, formatting, and organization."""
 
     @property

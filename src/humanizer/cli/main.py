@@ -261,7 +261,7 @@ def cli(
         sys.exit(1)
 
     # Build engine
-    engine_kwargs: dict = {}
+    engine_kwargs: dict[str, str] = {}
     if model:
         engine_kwargs["model"] = model
     if api_key:

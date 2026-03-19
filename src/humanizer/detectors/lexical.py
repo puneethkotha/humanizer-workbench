@@ -15,6 +15,7 @@ for multi-word phrases.
 import re
 
 from humanizer.core.models import DetectionResult, PatternMatch
+from humanizer.detectors.base import BaseDetector
 
 # Words that appear at statistically elevated rates in LLM output.
 # These are not inherently bad words — they're flags for *density*.
@@ -141,7 +142,7 @@ AI_FILLER_PHRASES: tuple[str, ...] = (
 )
 
 
-class LexicalDetector:
+class LexicalDetector(BaseDetector):
     """Detects AI-like vocabulary and filler phrases."""
 
     @property
