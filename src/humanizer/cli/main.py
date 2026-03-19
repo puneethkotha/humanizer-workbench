@@ -271,18 +271,14 @@ def cli(
         engine = HumanizerEngine(**engine_kwargs)
     except ValueError as e:
         err_console.print(f"[red]{e}[/red]")
-        err_console.print(
-            "[dim]Set ANTHROPIC_API_KEY or pass --api-key to use this tool.[/dim]"
-        )
+        err_console.print("[dim]Set ANTHROPIC_API_KEY or pass --api-key to use this tool.[/dim]")
         sys.exit(1)
 
     # Display run info
     style_name = StyleName(style)
     intensity_level = Intensity(intensity)
 
-    console.print(
-        f"[dim]Style: {style} · Intensity: {intensity} · Model: {engine.model}[/dim]"
-    )
+    console.print(f"[dim]Style: {style} · Intensity: {intensity} · Model: {engine.model}[/dim]")
 
     # Run humanization
     with console.status("[bold green]Humanizing...[/bold green]"):

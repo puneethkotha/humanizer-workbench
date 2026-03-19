@@ -75,9 +75,7 @@ class HumanizerEngine:
         client = anthropic.Anthropic(api_key=resolved_key)
 
         self._transformer = LLMTransformer(client=client, model=model)
-        self._detector = CompositeDetector(
-            detectors=[LexicalDetector(), StructuralDetector()]
-        )
+        self._detector = CompositeDetector(detectors=[LexicalDetector(), StructuralDetector()])
         self._scorer = AIScorer()
         self._model = model
 

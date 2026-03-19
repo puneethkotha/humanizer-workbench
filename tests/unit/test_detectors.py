@@ -22,7 +22,9 @@ class TestLexicalDetector:
         text = "This comprehensive approach leverages robust synergies to facilitate seamless integration."
         result = self.detector.detect(text)
         assert len(result.ai_vocabulary_hits) >= 4
-        assert "leverage" in result.ai_vocabulary_hits or "leverages" not in result.ai_vocabulary_hits
+        assert (
+            "leverage" in result.ai_vocabulary_hits or "leverages" not in result.ai_vocabulary_hits
+        )
         # Check specific words we know are in the vocabulary list
         found_words = set(result.ai_vocabulary_hits)
         expected_words = {"comprehensive", "robust", "seamless", "facilitate"}

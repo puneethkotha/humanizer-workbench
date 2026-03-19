@@ -136,9 +136,7 @@ class AIScorer:
         # Component 1: AI vocabulary density (0–30 points)
         # Each AI word contributes, but density is what matters — one use
         # is natural, five in a paragraph is a pattern.
-        ai_word_count = sum(
-            1 for w in words if w.strip(".,!?;:'\"()[]") in _AI_VOCAB_FOR_SCORING
-        )
+        ai_word_count = sum(1 for w in words if w.strip(".,!?;:'\"()[]") in _AI_VOCAB_FOR_SCORING)
         # Normalize: 10% density = max score. Cap so sparse text doesn't score 0.
         vocab_score = min(30.0, (ai_word_count / word_count) * 300)
 
@@ -189,9 +187,7 @@ class AIScorer:
         word_count = max(len(words), 1)
         sentences = _split_sentences(text)
 
-        ai_word_count = sum(
-            1 for w in words if w.strip(".,!?;:'\"()[]") in _AI_VOCAB_FOR_SCORING
-        )
+        ai_word_count = sum(1 for w in words if w.strip(".,!?;:'\"()[]") in _AI_VOCAB_FOR_SCORING)
         vocab_score = min(30.0, (ai_word_count / word_count) * 300)
         phrase_score = min(25.0, detection.phrase_count * 4.0)
 

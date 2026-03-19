@@ -94,18 +94,14 @@ class TestGetStyle:
 
     def test_styles_are_distinct(self):
         """Ensure each style has a unique voice description."""
-        voice_descriptions = [
-            STYLE_REGISTRY[s].voice_description for s in StyleName
-        ]
+        voice_descriptions = [STYLE_REGISTRY[s].voice_description for s in StyleName]
         assert len(set(voice_descriptions)) == len(voice_descriptions), (
             "Two style presets have identical voice descriptions"
         )
 
     def test_styles_have_distinct_tone_descriptors(self):
         """The sets of tone descriptors should differ between styles."""
-        tone_sets = [
-            frozenset(STYLE_REGISTRY[s].tone_descriptors) for s in StyleName
-        ]
+        tone_sets = [frozenset(STYLE_REGISTRY[s].tone_descriptors) for s in StyleName]
         # No two styles should have identical tone descriptor sets
         assert len(set(tone_sets)) == len(tone_sets), (
             "Two style presets have identical tone descriptor sets"

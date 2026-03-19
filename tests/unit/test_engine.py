@@ -175,7 +175,9 @@ class TestHumanizerEngineHumanize:
 
     def test_long_text_warning(self, mock_engine):
         # 8 words × 220 repetitions = 1760 words, which exceeds the 1500-word threshold
-        long_text = " ".join(["This comprehensive approach leverages robust synergies and ecosystems."] * 220)
+        long_text = " ".join(
+            ["This comprehensive approach leverages robust synergies and ecosystems."] * 220
+        )
         with pytest.warns(UserWarning, match="words"):
             mock_engine.humanize(long_text)
 

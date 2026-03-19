@@ -103,8 +103,7 @@ class TestAIScorer:
         ai_score = self.scorer.score(HEAVY_AI_TEXT, ai_detection)
         clean_score = self.scorer.score(CLEAN_HUMAN_TEXT, clean_detection)
         assert ai_score > clean_score, (
-            f"AI text should score higher than clean text. "
-            f"AI: {ai_score}, Clean: {clean_score}"
+            f"AI text should score higher than clean text. AI: {ai_score}, Clean: {clean_score}"
         )
 
 
@@ -169,13 +168,9 @@ class TestAIScorerComponents:
     def test_ai_text_has_high_vocabulary_density(self):
         detection = detect(HEAVY_AI_TEXT)
         components = self.scorer.describe_components(HEAVY_AI_TEXT, detection)
-        assert components["vocabulary_density"] > 5, (
-            "Expected high vocabulary density for AI text"
-        )
+        assert components["vocabulary_density"] > 5, "Expected high vocabulary density for AI text"
 
     def test_clean_text_has_low_filler_phrases(self):
         detection = detect(CLEAN_HUMAN_TEXT)
         components = self.scorer.describe_components(CLEAN_HUMAN_TEXT, detection)
-        assert components["filler_phrases"] == 0, (
-            "Expected zero filler phrases in clean human text"
-        )
+        assert components["filler_phrases"] == 0, "Expected zero filler phrases in clean human text"
