@@ -71,3 +71,4 @@ dmypy.json
 # Distribution
 *.tar.gz
 *.whl
+.github/workflows/
